@@ -19,11 +19,15 @@ headers={
     'referrer':'https://ssj.sslibrary.com',
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36 Edg/94.0.992.31'
     }
-os.mkdir('tmp')
+if not os.access('tmp',os.F_OK):
+    os.mkdir('tmp')
 tqdm.write('pdf下载中……')
 for cpage in tqdm(range(1,total+1),ncols=70,leave=False): #下载pdf的每一页
     url=base+"&cpage=" + str(cpage)
     page=requests.get(url,headers=headers)
+    if(len(page.content)<5000):
+        tqdm.write('被检测到爬虫，只能爬取一部分页面！')
+        break
     with open('.\\tmp\\'+str(cpage)+'.pdf','wb') as fd:
         fd.write(page.content)
         
