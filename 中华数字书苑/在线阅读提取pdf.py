@@ -8,7 +8,7 @@ url=input('输入阅读器页面地址：')
 total_page=int(input('输入总页数：'))
 center=re.search('(\\?metaid=.*)&page=.*?(&.*)',url,re.S)
 center=center.group(1)+center.group(2)
-base='http://cebxol.apabiedu.com/api/getservice'+center+'&width=300&height=500&ServiceType=imagepage&page='
+base='http://cebxol.apabiedu.com/api/getservice'+center+'&width=1200&height=1200&ServiceType=imagepage&page='
 if not os.access('tmp',os.F_OK):
     os.mkdir('tmp')
 print('jpg下载中……')
